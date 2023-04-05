@@ -175,7 +175,7 @@ def create_ds(path: Path) -> xr.Dataset:
 
     print(path)
 
-    return ds_merged, ds_complete
+    return ds_merged
 
 
 def download_file(
