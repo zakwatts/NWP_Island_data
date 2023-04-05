@@ -118,6 +118,9 @@ def build_url(date: datetime, fc: int) -> str:
 
 def extract_latlong(ds: xr.Dataset, lat_min: float, lat_max: float, long_min: float, long_max: float) -> None:
 
+    print(ds.dims)
+    print(ds.coords)
+
     it = ds.sel(latitude=slice(lat_max, lat_min), longitude=slice(long_min, long_max))
     # longitude=slice(long_min, long_max)
         # This just determines the size of the chunkingin each stage of the code.
