@@ -34,7 +34,48 @@ def create_ds(path: Path) -> xr.Dataset:
     wind components, downward longwave radiation flux, and 
     precipitation rate) and merges them into a single Dataset.
     """
-    ds_complete = xr.Dataset(path)
+    ds_complete = xr.open_dataset(
+        path,
+        engine="cfgrib",
+        backend_kwargs={
+            "filter_by_keys": {
+                "typeOfLevel": [
+                    "surface",
+                    "planetaryBoundaryLayer",
+                    "isobaricInhPa",
+                    "meanSea",
+                    "depthBelowLandLayer",
+                    "heightAboveGround",
+                    "atmosphereSingleLayer",
+                    "lowCloudLayer",
+                    "middleCloudLayer",
+                    "highCloudLayer",
+                    "atmosphere",
+                    "convectiveCloudBottom",
+                    "lowCloudBottom",
+                    "middleCloudBottom",
+                    "highCloudBottom",
+                    "convectiveCloudTop",
+                    "lowCloudTop",
+                    "middleCloudTop",
+                    "highCloudTop",
+                    "convectiveCloudLayer",
+                    "boundaryLayerCloudLayer",
+                    "nominalTop",
+                    "heightAboveGroundLayer",
+                    "tropopause",
+                    "maxWind",
+                    "heightAboveSea",
+                    "isothermZero",
+                    "highestTroposphericFreezing",
+                    "pressureFromGroundLayer",
+                    "sigmaLayer",
+                    "sigma",
+                    "potentialVorticity"
+                ],
+            }
+        },
+    )
     
     print(path)
 
