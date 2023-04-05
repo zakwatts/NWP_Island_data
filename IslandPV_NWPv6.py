@@ -78,6 +78,8 @@ def create_ds(path: Path) -> xr.Dataset:
     )
     
     print(path)
+    
+    print(ds_complete)
 
     return ds_complete
 
