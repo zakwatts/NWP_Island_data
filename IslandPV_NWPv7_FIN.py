@@ -142,15 +142,15 @@ def create_ds(path: Path) -> xr.Dataset:
     ds_acl = ds_acl.rename({'tcc': 'tcc_atmosphere'})
 
 
-    ds_ccb = xr.open_dataset(
+    ds_lcl = xr.open_dataset(
         path,
         engine="cfgrib",
         backend_kwargs={
             "filter_by_keys": {
                 "cfVarName": "unknown",
-                "typeOfLevel": "convectiveCloudBottom",
+                "typeOfLevel": "lowCloudLayer",
             }},)
-    ds_ccb = ds_ccb.rename({'tcc': 'tcc_convectiveCloudBottom'})
+    ds_lcl = ds_lcl.rename({'tcc': 'tcc_lowCloudLayer'})
 
 
     ds_blcl = xr.open_dataset(
@@ -197,7 +197,7 @@ def create_ds(path: Path) -> xr.Dataset:
     ds_u = ds_u.isel(isobaricInhPa=0).u
 
     #I addded compat='override', however instead i could create different collumn names to identify the data
-    ds_merged = xr.merge([ds_t, ds_u, ds_v, ds_d, ds_p, ds_dswrf, ds_hum, ds_mcl, ds_hcl,ds_ntcl,ds_blcl,ds_ccb,ds_acl,ds_tp,ds_cfrzr],compat='override')
+    ds_merged = xr.merge([ds_t, ds_u, ds_v, ds_d, ds_p, ds_dswrf, ds_hum, ds_mcl, ds_hcl,ds_ntcl,ds_blcl,ds_lcl,ds_acl,ds_cfrzr],compat='override')
 
     print(path)
 
